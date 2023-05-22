@@ -19,14 +19,14 @@ namespace DapperServer.DataAccessLayer.Implementation
 
         public async Task InsertUserFollow(int id_utilizator, int friend_id)
         {
-            var query = $"INSERT INTO UserFollow(user_id, friend_id) VALUES({id_utilizator}, {friend_id})";
+            var query = $"INSERT INTO heroku_4b02a80e7cb1159.userfollow(user_id, friend_id) VALUES({id_utilizator}, {friend_id})";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }
 
         public async Task DeleteUserFollow(int id_utilizator, int friend_id)
         {
-            var query = $"DELETE FROM UserFollow WHERE user_id = {id_utilizator} AND friend_id = {friend_id}";
+            var query = $"DELETE FROM heroku_4b02a80e7cb1159.userfollow WHERE user_id = {id_utilizator} AND friend_id = {friend_id}";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }

@@ -15,7 +15,7 @@ namespace DapperServer.DataAccessLayer.Implementation
 
         public async Task InsertMessage(int id_utilizator, int friend_id, string message, string date)
         {
-            var query = $"INSERT INTO ChatConversations(user_id, friend_id, conversation, inserted_date) VALUES({id_utilizator}, {friend_id}, '{message}', '{date}')";
+            var query = $"INSERT INTO heroku_4b02a80e7cb1159.chatconversations(user_id, friend_id, conversation, inserted_date) VALUES({id_utilizator}, {friend_id}, '{message}', '{date}')";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }
@@ -55,8 +55,8 @@ namespace DapperServer.DataAccessLayer.Implementation
 
         public async Task DeleteUserConversation(int user_id, int friend_id)
         {
-            var query = $"DELETE FROM ChatConversations WHERE user_id = {user_id} AND friend_id = {friend_id} " +
-                $"DELETE FROM ChatConversations WHERE user_id = {friend_id} AND friend_id = {user_id}";
+            var query = $"DELETE FROM heroku_4b02a80e7cb1159.chatconversations WHERE user_id = {user_id} AND friend_id = {friend_id} " +
+                $"DELETE FROM heroku_4b02a80e7cb1159.chatconversations WHERE user_id = {friend_id} AND friend_id = {user_id}";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }

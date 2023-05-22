@@ -38,23 +38,23 @@ namespace DapperServer.DataAccessLayer.Implementation
 
         public async Task<IEnumerable<UserPosts>> SelectUserPosts(int user_id)
         {
-            var query = $"SELECT * FROM UserPosts WHERE user_id = {user_id} ORDER BY inserted_date";
+            var query = $"SELECT * FROM heroku_4b02a80e7cb1159.userposts WHERE user_id = {user_id} ORDER BY inserted_date";
 
             return await Connection.QueryAsync<UserPosts>(query, transaction: Transaction);
         }
 
         public async Task DeleteUserPosts(int user_id, int post_id)
         {
-            var query = $"DELETE FROM UserPostComments WHERE post_id = {post_id} " +
-                $"DELETE FROM UserPostLikes WHERE post_id = {post_id} " +
-                $"DELETE FROM UserPosts WHERE user_id = {user_id} AND id = {post_id} ";
+            var query = $"DELETE FROM heroku_4b02a80e7cb1159.userpostcomments WHERE post_id = {post_id} " +
+                $"DELETE FROM heroku_4b02a80e7cb1159.userpostlikes WHERE post_id = {post_id} " +
+                $"DELETE FROM heroku_4b02a80e7cb1159.userposts WHERE user_id = {user_id} AND id = {post_id} ";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }
 
         public async Task InsertComment(int user_id, InsertCommentRequest request, string date)
         {
-            var query = $"INSERT INTO UserPostComments(" +
+            var query = $"INSERT INTO heroku_4b02a80e7cb1159.userpostcomments(" +
                 $"user_id, " +
                 $"friend_id, " +
                 $"post_id, " +
@@ -72,7 +72,7 @@ namespace DapperServer.DataAccessLayer.Implementation
 
         public async Task InsertLike(int user_id, InsertLikeRequest request)
         {
-            var query = $"INSERT INTO UserPostLikes(" +
+            var query = $"INSERT INTO heroku_4b02a80e7cb1159.userpostlikes(" +
                 $"user_id, " +
                 $"friend_id, " +
                 $"post_id, " +
@@ -88,14 +88,14 @@ namespace DapperServer.DataAccessLayer.Implementation
 
         public async Task DeleteLike(int id)
         {
-            var query = $"DELETE FROM UserPostLikes WHERE id = {id}";
+            var query = $"DELETE FROM heroku_4b02a80e7cb1159.userpostlikes WHERE id = {id}";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }
 
         public async Task DeleteComment(int id)
         {
-            var query = $"DELETE FROM UserPostComments WHERE id = {id}";
+            var query = $"DELETE FROM heroku_4b02a80e7cb1159.userpostcomments WHERE id = {id}";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }

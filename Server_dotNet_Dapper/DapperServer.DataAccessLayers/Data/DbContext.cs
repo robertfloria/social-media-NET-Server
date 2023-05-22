@@ -3,8 +3,8 @@ using DapperServer.Common.Settings;
 using DapperServer.DataAccessLayer.Implementation;
 using DapperServer.DataAccessLayer.Interfaces;
 using Microsoft.Extensions.Options;
+using MySqlConnector;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace DapperServer.DataAccessLayer.Data
 {
@@ -28,7 +28,7 @@ namespace DapperServer.DataAccessLayer.Data
             {
                 _aesEncryptionService = aesEncryptionService;
                 var decryptedConnection = _aesEncryptionService.Decrypt(appSettings.Value.DatabaseConnectionString);
-                _connection = new SqlConnection(decryptedConnection);
+                _connection = new MySqlConnection (decryptedConnection);
                 _connection.Open();
                 _transaction = _connection.BeginTransaction();
             }

@@ -23,7 +23,7 @@ services.AddCors(options =>
     options.AddPolicy("MyAllowSpecificOrigins",
                         policy =>
                         {
-                            policy.WithOrigins("http://localhost:3004")
+                            policy.WithOrigins("https://robert-social.herokuapp.com")
                                   .AllowAnyHeader()
                                   .AllowAnyMethod()
                                   .AllowCredentials();

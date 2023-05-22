@@ -64,7 +64,7 @@ namespace DapperServer.DataAccessLayer.Implementation
 
         public async Task<UserDetails> GetUserDetails(int id_utilizator)
         {
-            var query = $"SELECT user_id, full_name, country, city, email, education, birthday from UserDetails WHERE user_id = '{id_utilizator}'";
+            var query = $"SELECT user_id, full_name, country, city, email, education, birthday from heroku_4b02a80e7cb1159.userdetails WHERE user_id = '{id_utilizator}'";
 
             return await Connection.QueryFirstAsync<UserDetails>(query, transaction: Transaction);
         }

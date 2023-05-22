@@ -16,35 +16,35 @@ namespace DapperServer.DataAccessLayer.Implementation
         public UserPhotoRepository(IDbTransaction transaction, IDbConnection connection) : base(transaction, connection) { }
         public async Task UpdateUserProfilePhoto(int id_utilizator, string path)
         {
-            var query = $"UPDATE UserPhotos SET profile_photo = '{path}' WHERE user_id = '{id_utilizator}'";
+            var query = $"UPDATE heroku_4b02a80e7cb1159.userphotos SET profile_photo = '{path}' WHERE user_id = '{id_utilizator}'";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }
 
         public async Task UpdateUserCoverPhoto(int id_utilizator, string path)
         {
-            var query = $"UPDATE UserPhotos SET cover_photo = '{path}' WHERE user_id = '{id_utilizator}'";
+            var query = $"UPDATE heroku_4b02a80e7cb1159.userphotos SET cover_photo = '{path}' WHERE user_id = '{id_utilizator}'";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }
 
         public async Task InsertUserProfileCoverEmptyPicture(int id_utilizator)
         {
-            var query = $"INSERT INTO UserPhotos(user_id, profile_photo, cover_photo) VALUES('{id_utilizator}', ' ', ' ')";
+            var query = $"INSERT INTO heroku_4b02a80e7cb1159.userphotos(user_id, profile_photo, cover_photo) VALUES('{id_utilizator}', ' ', ' ')";
 
             await Connection.QueryAsync(query, transaction: Transaction);
         }
 
         public async Task<UserPhotoResponse> SelectUserPhotos(int id_utilizator)
         {
-            var query = $"SELECT [profile_photo], [cover_photo] from UserPhotos WHERE user_id = '{id_utilizator}'";
+            var query = $"SELECT profile_photo, cover_photo from heroku_4b02a80e7cb1159.userphotos WHERE user_id = '{id_utilizator}'";
 
             return await Connection.QueryFirstAsync<UserPhotoResponse>(query, transaction: Transaction);
         }
 
         public async Task<IEnumerable<UsersPhotoResponse>> SelectUsersPhotos()
         {
-            var query = $"SELECT [id], [user_id], [profile_photo], [cover_photo] from UserPhotos";
+            var query = $"SELECT id, user_id, profile_photo, cover_photo from userphotos";
 
             return await Connection.QueryAsync<UsersPhotoResponse>(query, transaction: Transaction);
         }
